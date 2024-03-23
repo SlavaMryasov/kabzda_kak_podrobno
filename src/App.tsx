@@ -11,7 +11,7 @@ const App = () => {
   return <div>
     <AppTitle value={'This is APP Component'}/>
     <Rating value={3}/>
-    <Accordion accordionTitle={'Menu'} collapsed={true}/>
+    <Accordion accordionTitle={'Menu'} collapsed={false}/>
     <Rating value={1}/>
     <Rating value={2}/>
     <Rating value={3}/>

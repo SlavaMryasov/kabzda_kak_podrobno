@@ -1,23 +1,26 @@
 
 type AccordionPropsType = {
     accordionTitle: string
-    collapsed?: boolean
+    collapsed: boolean
 }
 
 export const Accordion = ({accordionTitle, collapsed}: AccordionPropsType) => {
     console.log('accordion rendering')
     return (
         <div>
-        {!collapsed 
-        ? <><AccordionTitle accordionTitle={accordionTitle}/><AccordionBody/></>
-        : <AccordionTitle accordionTitle={accordionTitle}/>}
-    </div>
+            <AccordionTitle accordionTitle={accordionTitle}/>
+            {!collapsed && <AccordionBody/>}        
+        </div>
     )
   }
 
 
 
-  const AccordionTitle = (props: AccordionPropsType) => {
+  type AccordionTitlePropsType = {
+    accordionTitle: string
+}
+
+  const AccordionTitle = (props: AccordionTitlePropsType) => {
     console.log('title rendering')
     return (
       <h3>{props.accordionTitle}</h3>

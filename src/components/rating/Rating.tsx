@@ -4,14 +4,13 @@ type RatingPropsType = {
 }
 
  export const Rating = ({value}: RatingPropsType) => {
-    // if(value ===1){}
     return (
       <div>
-        <Star selected/>
-        <Star/>
-        <Star selected/>
-        <Star/>
-        <Star/>
+        <Star selected={value > 0}/>
+        <Star selected={value > 1}/>
+        <Star selected={value > 2}/>
+        <Star selected={value > 3}/>
+        <Star selected={value > 4}/>
       </div>
     );
   };
