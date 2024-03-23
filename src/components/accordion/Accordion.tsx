@@ -1,14 +1,21 @@
 
 type AccordionPropsType = {
     accordionTitle: string
-    collapsed: boolean
+    collapsed: boolean,
+    setCollapsedAccordion: (collapsed: boolean)=> void
+   
 }
 
-export const Accordion = ({accordionTitle, collapsed}: AccordionPropsType) => {
+
+
+export const Accordion = ({accordionTitle, collapsed, setCollapsedAccordion}: AccordionPropsType) => {
     console.log('accordion rendering')
+
     return (
         <div>
-            <AccordionTitle accordionTitle={accordionTitle}/>
+            <AccordionTitle setCollapsedAccordion={setCollapsedAccordion}
+              accordionTitle={accordionTitle} 
+              collapsed={collapsed}/>
             {!collapsed && <AccordionBody/>}        
         </div>
     )
@@ -18,12 +25,19 @@ export const Accordion = ({accordionTitle, collapsed}: AccordionPropsType) => {
 
   type AccordionTitlePropsType = {
     accordionTitle: string
+    collapsed?: boolean
+    setCollapsedAccordion: (collapsed: boolean)=> void
 }
 
-  const AccordionTitle = (props: AccordionTitlePropsType) => {
+  const AccordionTitle = ({setCollapsedAccordion,collapsed, ...props}: AccordionTitlePropsType) => {
     console.log('title rendering')
+
+    const collapsedHandler = (collapsed: boolean) => {
+        setCollapsedAccordion(collapsed)
+    }
+
     return (
-      <h3>{props.accordionTitle}</h3>
+      <h3 onClick={()=>collapsedHandler(!collapsed)}>{props.accordionTitle}</h3>
     )
   }
   

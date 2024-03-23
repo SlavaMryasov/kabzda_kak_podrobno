@@ -3,22 +3,27 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Accordion } from "./components/accordion/Accordion";
 import { Rating } from "./components/rating/Rating";
-import { OnOff } from "./components/onOff/OnOff";
+import { OnOff } from './components/onOff/OnOff'
+import { useState } from "react"
 
 
 
 const App = () => {
   // функция с большой буквы и возвращающая jsx - компонента
+  const [stateButton, setStateButton] = useState(false)
+  const [collapsed, setCollapsedAccordion] = useState(true)
   return <div>
     <AppTitle value={'This is APP Component'}/>
-    <Rating value={3}/>
-    <Accordion accordionTitle={'Menu'} collapsed={false}/>
-    <Rating value={1}/>
+    
+    <Accordion accordionTitle={'Menu'} collapsed={collapsed} 
+    setCollapsedAccordion={setCollapsedAccordion}/>
+    {/* <Rating value={1}/>
     <Rating value={2}/>
     <Rating value={3}/>
     <Rating value={4}/>
-    <Rating value={5}/>
-    <OnOff on={false}/>
+    <Rating value={5}/> */}
+    <OnOff on={stateButton} setStateButton={setStateButton}/>
+    <Rating value={3}/>
     </div>;
 };
 
@@ -37,3 +42,5 @@ const AppTitle = (props: AppTitlePropsType) => {
 
 
 export default App;
+
+
