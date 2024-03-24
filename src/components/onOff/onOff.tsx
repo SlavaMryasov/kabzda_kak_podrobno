@@ -2,10 +2,10 @@
 
 type OnOffPropsType = {
     on: boolean
-    setStateButton: (value: boolean)=> void
+    onChange: (value: boolean)=> void
 }
 
-export const OnOff = ({on, setStateButton}: OnOffPropsType) => {
+export const OnOff = ({on, onChange}: OnOffPropsType) => {
 
     const onStyle = {
         backgroundColor: on ? 'green': ''
@@ -23,11 +23,12 @@ export const OnOff = ({on, setStateButton}: OnOffPropsType) => {
     }
 
     const onClickHandler = (value: boolean) => {
-        setStateButton(value)
+        onChange(value)
     }
 
     return (
         <div>
+            
             {/* <button style={{backgroundColor: on ? 'green': ''}}>on</button> */}
             {/* <button style={{backgroundColor: !on ? 'red': ''}}>off</button> */}
             {/* <div style={{backgroundColor:  on===true? 'green': 'red', width: '50px', height:'50px'}}></div> */}

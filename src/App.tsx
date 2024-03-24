@@ -12,6 +12,7 @@ const App = () => {
   // функция с большой буквы и возвращающая jsx - компонента
   const [stateButton, setStateButton] = useState(false)
   const [collapsed, setCollapsedAccordion] = useState(true)
+  const [num, setNum] = useState< 0 | 1 | 2 | 3 | 4 | 5 >(0);
   return <div>
     <AppTitle value={'This is APP Component'}/>
     
@@ -22,8 +23,9 @@ const App = () => {
     <Rating value={3}/>
     <Rating value={4}/>
     <Rating value={5}/> */}
-    <OnOff on={stateButton} setStateButton={setStateButton}/>
-    <Rating />
+    <OnOff on={stateButton} onChange={setStateButton}/>
+    {stateButton.toString()}
+    <Rating num={num} setNum={setNum}/>
     </div>;
 };
 
