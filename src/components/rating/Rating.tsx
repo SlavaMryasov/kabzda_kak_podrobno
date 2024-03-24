@@ -1,37 +1,33 @@
-import { useState } from "react";
+import { useState } from "react"
 
-type RatingPropsType = {
-    value: 1 | 2 | 3 | 4 | 5
+
+
+
+export const Rating = () => {
+  const [num, setNum] = useState(0)
+  return (
+    <div>
+      <Star num={1} selected={num > 0} setNum={setNum}/>
+      <Star num={2} selected={num > 1} setNum={setNum}/>
+      <Star num={3} selected={num > 2} setNum={setNum}/>
+      <Star num={4} selected={num > 3} setNum={setNum}/>
+      <Star num={5} selected={num > 4} setNum={setNum}/>
+    </div>
+  )
 }
 
-const [value, setValue] = useState(2)
 
- export const Rating = () => {
-    return (
-      <div>
-        <Star selected={value > 0} setValue={setValue}/>
-        <Star selected={value > 1} setValue={setValue}/>
-        <Star selected={value > 2} setValue={setValue}/>
-        <Star selected={value > 3} setValue={setValue}/>
-        <Star selected={value > 4} setValue={setValue}/>
-      </div>
-    );
-  };
-  
+type StarPropsType = {
+  selected?: boolean
+  num: number
+  setNum: (num: number) => void
+}
 
-  type StarPropsType = {
-    selected?: boolean
-    setValue: (value: RatingPropsType)=> void
+const Star = ({selected,num, setNum}: StarPropsType) => {
+  const handler = (num: number) => {
+    setNum(num)
   }
-
-
-
-  const Star = ({selected, setValue}: StarPropsType) => {
-    const handlerr = (value: RatingPropsType) => {
-        setValue(value)
-     }
-    return (
-      <span onClick={()=>handlerr(2)}>{selected ? <b>star-</b>: 'star-'}</span>
-    )
-  }
-  
+  return (
+    <span onClick={()=>handler(num)}>{selected ? <b>star-</b>: 'star-'}</span>
+  )
+}

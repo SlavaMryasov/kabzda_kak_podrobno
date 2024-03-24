@@ -23,7 +23,7 @@ const App = () => {
     <Rating value={4}/>
     <Rating value={5}/> */}
     <OnOff on={stateButton} setStateButton={setStateButton}/>
-    <Rating value={3}/>
+    <Rating />
     </div>;
 };
 
