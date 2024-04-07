@@ -18,11 +18,6 @@ const App = () => {
     
     <Accordion accordionTitle={'Menu'} collapsed={collapsed} 
     setCollapsedAccordion={setCollapsedAccordion}/>
-    {/* <Rating value={1}/>
-    <Rating value={2}/>
-    <Rating value={3}/>
-    <Rating value={4}/>
-    <Rating value={5}/> */}
     <OnOff on={stateButton} onChange={setStateButton}/>
     {stateButton.toString()}
     <Rating num={num} setNum={setNum}/>

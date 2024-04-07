@@ -1,9 +1,8 @@
 
-type AccordionPropsType = {
+export type AccordionPropsType = {
     accordionTitle: string
     collapsed: boolean,
     setCollapsedAccordion: (collapsed: boolean)=> void
-   
 }
 
 
