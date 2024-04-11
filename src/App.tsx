@@ -1,9 +1,7 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Accordion } from "./components/accordion/Accordion";
 import { Rating } from "./components/rating/Rating";
-import { OnOff } from './components/onOff/OnOff'
+import { OnOff } from "./components/onOff/onOff";
 import { useState } from "react"
 
 

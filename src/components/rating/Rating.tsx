@@ -1,7 +1,8 @@
 
+export type RatingValue = 0| 1 | 2 | 3 | 4 | 5
 
 type RatingPropsType = {
-  num: 0| 1 | 2 | 3 | 4 | 5
+  num: RatingValue
   setNum: (num: 0| 1 | 2 | 3 | 4 | 5) => void
 }
 
