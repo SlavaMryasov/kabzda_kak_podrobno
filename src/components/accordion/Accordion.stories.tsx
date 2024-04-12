@@ -47,7 +47,7 @@ export const WorkingAccordion = () => {
       collapsed={collapesed}
       setCollapsedAccordion={() => { setCollapsed(!collapesed) }}
       items={
-        [{ title: 'slava', value: 1 },
+        [{ title: 'slava', value: 6 },
         { title: 'katya', value: 2 },
         { title: 'igor', value: 3 }]
       }

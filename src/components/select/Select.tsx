@@ -1,3 +1,4 @@
+import { useState } from "react"
 
 type ItemType = {
     title: string
@@ -6,13 +7,18 @@ type ItemType = {
 
 type SelectPropsType = {
     value: any
-    onChange: (value: any) => void
+    onClick: (value: any) => void
     items: ItemType[]
 }
 
-export const Select = ({ value, items, onChange }: SelectPropsType) => {
+export const Select = ({ value, items, onClick }: SelectPropsType) => {
+    const [collapsed, setCollapsed] = useState(true)
     return (
         <div>
+            <div onClick={() => setCollapsed(!collapsed)}>{value}</div>
+            {!collapsed &&
+                <div>{items.map(el => <div onClick={() => onClick(el.title)}>{el.title}</div>)}</div>
+            }
 
         </div>
     )
