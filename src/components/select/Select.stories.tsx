@@ -1,24 +1,39 @@
 import { useState } from "react";
 import { Select } from "./Select";
-import { action } from "@storybook/addon-actions";
+import { action } from '@storybook/addon-actions'
 
 export default {
+    title: "Select",
     component: Select
 }
 
-const users = [{ title: 'slava', value: 1 },
-{ title: 'katya', value: 2 },
-{ title: 'igor', value: 3 }]
-
-export const WorkingSelect = () => {
-    const [parentValue, setParentValue] = useState<any>(users[0].title)
-    const setParentValueHandler = (value: string) => {
-        action(value)()
-        setParentValue(value)
-    }
+export const WithValue = () => {
+    const [value, setValue] = useState('2')
     return (
-        <div>
-            <Select value={parentValue} onClick={setParentValueHandler} items={users} />
-        </div>
-    )
+        <>
+            <Select onChange={setValue}
+                value={value}
+                items={
+                    [
+                        { value: '1', title: 'kazan' },
+                        { value: '2', title: 'moscow' },
+                        { value: '3', title: 'kiev' },
+                    ]} />
+        </>)
+}
+
+
+export const WithoutValue = () => {
+    const [value, setValue] = useState(null)
+    return (
+        <>
+            <Select onChange={setValue}
+                value={value}
+                items={
+                    [
+                        { value: '1', title: 'kazan' },
+                        { value: '2', title: 'moscow' },
+                        { value: '3', title: 'kiev' },
+                    ]} />
+        </>)
 }
