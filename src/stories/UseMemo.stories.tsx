@@ -66,3 +66,50 @@ export const HelpsToReactMemo = () => {
         <Users users={newArray} />
     </>
 }
+
+export const MemoCities = () => {
+    type CityType = {
+        city: string
+        people: number
+    }
+    type LocationType = {
+        country: string
+        cities: CityType[]
+        people: number
+    }
+    const initialLocations: LocationType[] = [
+        {
+            country: 'Russia',
+            cities: [
+                { city: 'Moscow', people: 17 },
+                { city: 'Kazan', people: 1.3 },
+                { city: 'Ekb', people: 1.5 },
+            ],
+            people: 144
+        },
+        {
+            country: 'Belarus',
+            cities: [
+                { city: 'Minsk', people: 1.9 },
+                { city: 'Gomel', people: 0.5 },
+                { city: 'Vitebsk', people: 0.3 },
+            ],
+            people: 9.2
+        },
+    ]
+    type FilterValuesType = 'all' | 'Russia' | 'Belarus' | 'o' | 'count'
+    const [filter, setFilter] = useState<FilterValuesType>('all')
+    const [locations, setLocations] = useState(initialLocations)
+    console.log(filter)
+    return (
+        <div>
+            {/* {locations.map(el => <div key={el.country}>{el.country}</div>)} */}
+            {filter === 'Russia' ? locations.filter(el => el.country !== filter)}
+            <button onClick={() => setFilter('all')}>all</button>
+            <button onClick={() => setFilter('Russia')}>Russia</button>
+            <button onClick={() => setFilter('Belarus')}>Belarus</button>
+            <button onClick={() => setFilter('o')}>o</button>
+            <button onClick={() => setFilter('count')}>count bigger than 1</button>
+        </div>
+    )
+}
