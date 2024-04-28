@@ -1,4 +1,4 @@
-import { memo, useState } from "react"
+import React, { memo, useState } from "react"
 
 
 export default {
@@ -29,3 +29,6 @@ export const Example1 = () => {
         <Users users={users} />
     </>
 }
+
+
+

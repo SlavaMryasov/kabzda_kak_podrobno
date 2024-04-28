@@ -1,4 +1,4 @@
-import { useMemo, useState, memo } from "react"
+import { useMemo, useState, memo, useEffect } from "react"
 
 export default {
     title: 'useMemo'
@@ -67,49 +67,84 @@ export const HelpsToReactMemo = () => {
     </>
 }
 
-export const MemoCities = () => {
+
+
+export const CitiesMemo = () => {
+
+    let [count, setCount] = useState(0)
+    const setCountHandler = () => {
+
+        setCount(count += 1)
+
+
+
+    }
+
+    useMemo(() => {
+        let tempResultA = 1;
+        for (let i = 1; i <= 5; i++) {
+            let fake = 0
+            while (fake < 25000000) {
+                fake++
+                const fakeValue = Math.random();
+            }
+            tempResultA = tempResultA * i
+        }
+    }, [count])
+
+
+
     type CityType = {
-        city: string
-        people: number
-    }
-    type LocationType = {
-        country: string
-        cities: CityType[]
-        people: number
-    }
-    const initialLocations: LocationType[] = [
-        {
-            country: 'Russia',
-            cities: [
-                { city: 'Moscow', people: 17 },
-                { city: 'Kazan', people: 1.3 },
-                { city: 'Ekb', people: 1.5 },
-            ],
-            people: 144
-        },
-        {
-            country: 'Belarus',
-            cities: [
-                { city: 'Minsk', people: 1.9 },
-                { city: 'Gomel', people: 0.5 },
-                { city: 'Vitebsk', people: 0.3 },
-            ],
-            people: 9.2
-        },
-    ]
-    type FilterValuesType = 'all' | 'Russia' | 'Belarus' | 'o' | 'count'
-    const [filter, setFilter] = useState<FilterValuesType>('all')
-    const [locations, setLocations] = useState(initialLocations)
-    console.log(filter)
+        city: string;
+        country: string;
+        people: number;
+    };
+
+    type FilterType = 'all' | 'Russia' | 'Belarus' | 'million';
+
+    let initialState: CityType[] = [
+        { city: 'Moscow', country: 'Russia', people: 17 },
+        { city: 'Minsk', country: 'Belarus', people: 1.9 },
+        { city: 'Kazan', country: 'Russia', people: 1.3 },
+        { city: 'Grodno', country: 'Belarus', people: 0.5 },
+        { city: 'Novosibirsk', country: 'Russia', people: 1.5 },
+    ];
+
+    const [filter, setFilter] = useState<FilterType>('all');
+    const [cities, setCities] = useState<CityType[]>(initialState);
+
+    useEffect(() => {
+        console.log('filt')
+        let filteredCities: CityType[];
+        switch (filter) {
+            case 'Belarus':
+                filteredCities = initialState.filter(el => el.country === 'Belarus');
+                break;
+            case 'Russia':
+                filteredCities = initialState.filter(el => el.country === 'Russia');
+                break;
+            case 'million':
+                filteredCities = initialState.filter(el => el.people > 1);
+                break;
+            case 'all':
+            default:
+                filteredCities = initialState;
+                setCountHandler()
+        }
+        setCities(filteredCities);
+    }, [filter]); // Зависимость от filter, чтобы пересчитывать города при его изменении
+
     return (
-        <div>
-            {/* {locations.map(el => <div key={el.country}>{el.country}</div>)} */}
-            {filter === 'Russia' ? locations.filter(el => el.country !== filter)}
+        <>
             <button onClick={() => setFilter('all')}>all</button>
-            <button onClick={() => setFilter('Russia')}>Russia</button>
             <button onClick={() => setFilter('Belarus')}>Belarus</button>
-            <button onClick={() => setFilter('o')}>o</button>
-            <button onClick={() => setFilter('count')}>count bigger than 1</button>
-        </div>
-    )
-}
+            <button onClick={() => setFilter('Russia')}>Russia</button>
+            <button onClick={() => setFilter('million')}>million</button>
+            <ul>
+                {cities.map((el, index) => <li key={index}>{el.city}</li>)}
+            </ul>
+            {count}
+            <button onClick={setCountHandler}>+</button>
+        </>
+    );
+};
