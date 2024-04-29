@@ -73,11 +73,7 @@ export const CitiesMemo = () => {
 
     let [count, setCount] = useState(0)
     const setCountHandler = () => {
-
         setCount(count += 1)
-
-
-
     }
 
     useMemo(() => {
