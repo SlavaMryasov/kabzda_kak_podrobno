@@ -10,16 +10,16 @@ const App = () => {
   // функция с большой буквы и возвращающая jsx - компонента
   const [stateButton, setStateButton] = useState(false)
   const [collapsed, setCollapsedAccordion] = useState(true)
-  const [num, setNum] = useState< 0 | 1 | 2 | 3 | 4 | 5 >(0);
+  const [num, setNum] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
   return <div>
-    <AppTitle value={'This is APP Component'}/>
-    
-    <Accordion accordionTitle={'Menu'} collapsed={collapsed} 
-    setCollapsedAccordion={setCollapsedAccordion}/>
-    <OnOff on={stateButton} onChange={setStateButton}/>
+    <AppTitle value={'This is APP Component'} />
+
+    <Accordion accordionTitle={'Menu'} collapsed={collapsed} items={[]} onClick={() => { }}
+      setCollapsedAccordion={setCollapsedAccordion} />
+    <OnOff on={stateButton} onChange={setStateButton} />
     {stateButton.toString()}
-    <Rating num={num} setNum={setNum}/>
-    </div>;
+    <Rating num={num} setNum={setNum} />
+  </div>;
 };
 
 type AppTitlePropsType = {
