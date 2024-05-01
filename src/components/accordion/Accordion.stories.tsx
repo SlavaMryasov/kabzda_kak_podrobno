@@ -1,7 +1,6 @@
+import { action } from '@storybook/addon-actions';
+import React, { useState } from "react";
 import { Accordion } from "./Accordion";
-import { ChangeEvent, useState } from "react";
-import { action } from '@storybook/addon-actions'
-import React from "react";
 
 export default {
   component: Accordion,

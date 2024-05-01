@@ -1,5 +1,5 @@
-import { ChangeEvent, memo, useCallback, useMemo, useState } from "react"
-import { v1 } from "uuid"
+import { memo, useMemo, useState } from "react"
+
 
 type ItemType = {
   title: string
