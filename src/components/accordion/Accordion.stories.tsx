@@ -1,7 +1,7 @@
 import { Accordion } from "./Accordion";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { action } from '@storybook/addon-actions'
-
+import React from "react";
 
 export default {
   component: Accordion,
@@ -18,7 +18,7 @@ export const CollapsedAccordion = () => {
         collapsed={true}
         setCollapsedAccordion={setCollapsedAccordionHandler}
         items={[]}
-        onClick={onClickCallBack}
+      // onClick={onClickCallBack}
       />
     </div>
   );
@@ -34,24 +34,29 @@ export const OpenedAccordion = () => {
         { title: 'katya', value: 2 },
         { title: 'igor', value: 3 }]
       }
-      onClick={onClickCallBack}
+    // onClick={onClickCallBack}
     />
   </div>
 };
 
 export const WorkingAccordion = () => {
   const [collapesed, setCollapsed] = useState(false)
+
+  const collapsedHandler = (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => {
+    if (e.ctrlKey) {
+      setCollapsed(!collapesed)
+    }
+  }
+
   return <div>
     <Accordion
-      accordionTitle={"Menu"}
       collapsed={collapesed}
-      setCollapsedAccordion={() => { setCollapsed(!collapesed) }}
+      setCollapsedAccordion={(e) => collapsedHandler(e)}
       items={
         [{ title: 'slava', value: 6 },
         { title: 'katya', value: 2 },
         { title: 'igor', value: 3 }]
       }
-      onClick={onClickCallBack}
     />
   </div>
 };

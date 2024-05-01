@@ -22,6 +22,7 @@ export const Example1 = () => {
 
     const addUser = () => {
         setUsers([...users, 'masha'])
+        setCounter(counter + 1)
     }
 
     const plus = () => {

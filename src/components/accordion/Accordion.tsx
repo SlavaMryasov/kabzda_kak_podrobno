@@ -1,3 +1,4 @@
+import { ChangeEvent, memo, useCallback, useMemo, useState } from "react"
 import { v1 } from "uuid"
 
 type ItemType = {
@@ -6,58 +7,72 @@ type ItemType = {
 }
 
 export type AccordionPropsType = {
-  accordionTitle: string
+  accordionTitle?: string
   collapsed: boolean,
-  setCollapsedAccordion: (collapsed: boolean) => void
+  setCollapsedAccordion: (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => void
   items: ItemType[]
-  onClick: (value: any) => void
+
 }
 
 
 
-export const Accordion = ({ accordionTitle, collapsed, items, setCollapsedAccordion, onClick }: AccordionPropsType) => {
+export const Accordion = ({ collapsed, items, setCollapsedAccordion }: AccordionPropsType) => {
   console.log('accordion rendering')
+
+  const [editStatus, setEditStatus] = useState(false)
+  const [accordionTitle, setAccordionTitle] = useState('Menu')
+
+  const changeEditStatus = () => {
+    setEditStatus(!editStatus)
+  }
+
+  const changeTitle = (value: string) => {
+    setAccordionTitle(value)
+  }
+
+  const memoItems = useMemo(() => items, [items])
 
   return (
     <div>
-      <AccordionTitle setCollapsedAccordion={setCollapsedAccordion}
-        accordionTitle={accordionTitle}
-        collapsed={collapsed} />
-      {!collapsed && <AccordionBody items={items} onClick={onClick} />}
+      свернуть и развернуть можно с помощью ctrl и клика
+      {!editStatus
+        ? <AccordionTitle setCollapsedAccordion={(e) => setCollapsedAccordion(e)} accordionTitle={accordionTitle} collapsed={collapsed} editStatus={editStatus} setEditStatus={setEditStatus} />
+        : <input autoFocus value={accordionTitle} onDoubleClick={changeEditStatus} onChange={(e) => changeTitle(e.currentTarget.value)} onBlur={changeEditStatus} />
+      }
+
+      {!collapsed && <AccordionBodyMemo items={memoItems} />}
     </div>
   )
 }
 
 
-
+//title
 type AccordionTitlePropsType = {
   accordionTitle: string
   collapsed?: boolean
-  setCollapsedAccordion: (collapsed: boolean) => void
+  setCollapsedAccordion: (e: React.MouseEvent<HTMLHeadingElement>) => void
+  editStatus: boolean
+  setEditStatus: (editStatus: boolean) => void
 }
 
-const AccordionTitle = ({ setCollapsedAccordion, collapsed, ...props }: AccordionTitlePropsType) => {
-  const collapsedHandler = (collapsed: boolean) => {
-    setCollapsedAccordion(collapsed)
-  }
+const AccordionTitle = ({ setCollapsedAccordion, collapsed, editStatus, setEditStatus, ...props }: AccordionTitlePropsType) => {
   return (
-    <h3 onClick={() => collapsedHandler(!collapsed)}>{props.accordionTitle}</h3>
+    <h3 onClick={setCollapsedAccordion} onDoubleClick={() => setEditStatus(!editStatus)}>{props.accordionTitle}</h3>
   )
 }
 
-
-
+//body
 export type AccordionBodyPropsType = {
   items: ItemType[]
-  onClick: (value: any) => void
 }
 
-const AccordionBody = ({ items, onClick }: AccordionBodyPropsType) => {
+const AccordionBody = ({ items }: AccordionBodyPropsType) => {
   console.log('body rendering')
   return (
     <ul>
-      {items.map(el => <li key={v1()} onClick={() => { onClick(el.value) }}>{el.title}</li>)}
+      {items.map((el, i) => <li key={i} >{el.title}</li>)}
     </ul>
   )
 }
 
+const AccordionBodyMemo = memo(AccordionBody)
