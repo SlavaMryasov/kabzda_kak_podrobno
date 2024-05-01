@@ -1,34 +1,38 @@
-import React, { memo, useState } from "react"
+import { memo, useState } from "react"
 
 
 export default {
-    title: 'React.memo demo',
+    title: 'react memo demo'
 }
 
-const NewMessagesCounter = (props: any) => {
+const NewMessagesCounter = (props: { count: number }) => {
     return <div>{props.count}</div>
 }
-const UsersSecret = (props: { users: Array<string> }) => {
-    return <div>{props.users.map((el, i) => <div key={i}>{el}</div>)}</div>
+
+const UsersSecret = (props: { users: string[] }) => {
+    console.log('users')
+    return <div>{props.users.map((u, i) => <div key={i}>{u}</div>)}</div>
 }
+
 const Users = memo(UsersSecret)
 
 export const Example1 = () => {
-    console.log('Example')
     const [counter, setCounter] = useState(0)
-    const [users, setUsers] = useState(['slaba', 'dima', 'valera'])
+    const [users, setUsers] = useState(['slava', 'katya', 'dima'])
 
     const addUser = () => {
-        const newUsers = [...users, 'sveta' + new Date().getTime()]
-        setUsers(newUsers)
+        setUsers([...users, 'masha'])
     }
+
+    const plus = () => {
+        setCounter(counter + 1)
+        addUser()
+    }
+
     return <>
-        <button onClick={() => setCounter(counter + 1)}>+</button>
+        <button onClick={plus}>+</button>
         <button onClick={addUser}>add user</button>
         <NewMessagesCounter count={counter} />
         <Users users={users} />
     </>
 }
-
-
-
