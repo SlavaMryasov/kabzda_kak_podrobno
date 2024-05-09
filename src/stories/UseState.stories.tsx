@@ -15,7 +15,7 @@ export const Example1 = () => {
 
     const [counter, setCounter] = useState(generateData)
 
-    const changer = (state: number) => {
+    const changer = (state: number) => { // здесь стейтом будет являтся counter
         console.log(state, 'state')
         return state + 1
     }
