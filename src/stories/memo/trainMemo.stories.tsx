@@ -33,11 +33,13 @@ export const TrainMemo = () => {
     }
 
 
-    let usersMemo = useMemo(() => users, [initialUsers])
+    let usersMemo = useMemo(() => {
+        return users.map(el => el)
+    }, [users])
     return (
         <>
             <Counter count={count} setCount={countHandler} />
-            <UsersListMemo users={users} />
+            <UsersListMemo users={usersMemo} />
         </>
     )
 }

@@ -14,12 +14,8 @@ const App = () => {
   return <div>
     <AppTitle value={'This is APP Component'} />
 
-<<<<<<< HEAD
-    <Accordion onClick={() => { }} items={[]} accordionTitle={'Menu'} collapsed={collapsed}
-=======
-    <Accordion accordionTitle={'Menu'} collapsed={collapsed} items={[]} onClick={() => { }}
->>>>>>> dev
-      setCollapsedAccordion={setCollapsedAccordion} />
+    <Accordion items={[]} accordionTitle={'Menu'} collapsed={collapsed}
+      setCollapsedAccordion={(e) => setCollapsedAccordion} />
     <OnOff on={stateButton} onChange={setStateButton} />
     {stateButton.toString()}
     <Rating num={num} setNum={setNum} />
