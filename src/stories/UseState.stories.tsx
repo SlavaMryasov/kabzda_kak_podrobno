@@ -19,7 +19,8 @@ export const Example1 = () => {
         console.log(state, 'state')
         return state + 1
     }
-
+    // при нажатии на кнопку реакт под капотом возьмет значение каунтер из сет каунтер и отдаст ее 
+    // функции changer
     return (
         <>
             {counter}
